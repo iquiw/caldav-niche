@@ -20,6 +20,8 @@
   },
   "homepage": "https://github.com/iquiw/caldav-niche#readme",
   "dependencies": {
+    "bluebird": "^3.5.0",
+    "ical.js": "^1.2.2",
     "superagent": "^3.5.2",
     "xml": "^1.0.1"
   },
