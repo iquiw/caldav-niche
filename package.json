@@ -22,7 +22,7 @@
   "dependencies": {
     "bluebird": "^3.5.0",
     "ical.js": "^1.2.2",
-    "superagent": "^3.5.2",
+    "superagent": "^3.6.0",
     "xml": "^1.0.1"
   },
   "devDependencies": {
