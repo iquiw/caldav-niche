@@ -26,8 +26,17 @@ test('mkcalendar XML with description', t => {
 test('propfind XML with allprop property', t => {
   let expected = '<?xml version="1.0" encoding="utf-8"?>'
       + '<propfind xmlns="DAV:" xmlns:C="urn:ietf:params:xml:ns:caldav">'
-      + '<C:allprop/>'
+      + '<allprop/>'
       + '</propfind>';
-  let actual = new PropFindXml('C:allprop').toXml();
+  let actual = new PropFindXml('allprop').toXml();
+  t.is(actual, expected);
+});
+
+test('propfind XML with non allprop property', t => {
+  let expected = '<?xml version="1.0" encoding="utf-8"?>'
+      + '<propfind xmlns="DAV:" xmlns:C="urn:ietf:params:xml:ns:caldav">'
+      + '<prop><C:calendar-home-set/></prop>'
+      + '</propfind>';
+  let actual = new PropFindXml('C:calendar-home-set').toXml();
   t.is(actual, expected);
 });
