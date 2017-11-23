@@ -1,6 +1,6 @@
 import test from 'ava';
 
-import { MkCalendarXml, PropFindXml } from '../lib/xmldata.js';
+import { MkCalendarXml, PropFindXml, ReportXml } from '../lib/xmldata.js';
 
 test('mkcalendar XML without options', t => {
   let expected = '<?xml version="1.0" encoding="utf-8"?>'
@@ -38,5 +38,21 @@ test('propfind XML with non allprop property', t => {
       + '<prop><C:calendar-home-set/></prop>'
       + '</propfind>';
   let actual = new PropFindXml('C:calendar-home-set').toXml();
+  t.is(actual, expected);
+});
+
+test('calendar-query XML with filter', t => {
+  let expected = '<?xml version="1.0" encoding="utf-8"?>'
+      + '<C:calendar-query xmlns="DAV:" xmlns:C="urn:ietf:params:xml:ns:caldav">'
+      + '<prop><C:calendar-data>'
+      + '<C:limit-recurrence-set start="20170101T123456Z" end="20171231T090807Z"/>'
+      + '</C:calendar-data></prop>'
+      + '<C:filter>'
+      + '<C:comp-filter name="VCALENDAR"><C:comp-filter name="VEVENT">'
+      + '<C:time-range start="20170101T123456Z" end="20171231T090807Z"/>'
+      + '</C:comp-filter></C:comp-filter>'
+      + '</C:filter>'
+      + '</C:calendar-query>';
+  let actual = new ReportXml({ start: '20170101T123456Z', end: '20171231T090807Z'}).toXml();
   t.is(actual, expected);
 });
