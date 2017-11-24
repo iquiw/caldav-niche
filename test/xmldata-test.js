@@ -1,6 +1,6 @@
 import test from 'ava';
 
-import { MkCalendarXml, PropFindXml, ReportXml } from '../lib/xmldata.js';
+import { MkCalendarXml, PropFindXml, CalendarQueryXml } from '../lib/xmldata.js';
 
 test('mkcalendar XML without options', t => {
   let expected = '<?xml version="1.0" encoding="utf-8"?>'
@@ -53,6 +53,8 @@ test('calendar-query XML with filter', t => {
       + '</C:comp-filter></C:comp-filter>'
       + '</C:filter>'
       + '</C:calendar-query>';
-  let actual = new ReportXml({ start: '20170101T123456Z', end: '20171231T090807Z'}).toXml();
+  let actual = new CalendarQueryXml({
+    start: '20170101T123456Z',
+    end: '20171231T090807Z'}).toXml();
   t.is(actual, expected);
 });
