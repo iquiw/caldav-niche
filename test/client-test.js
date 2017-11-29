@@ -26,3 +26,18 @@ TEST
 END:VCALENDAR
 `);
 });
+
+test('Parse XML without <C:calendar-data>', async t => {
+  t.plan(1);
+
+  let xml = `
+<?xml version="1.0"?>
+<multistatus xmlns="DAV:"/>
+`;
+  let parser = new Client.CalendarDataXmlParser();
+  try {
+    await parser.parse(xml);
+  } catch (e) {
+    t.is(e, 'No event found');
+  }
+});
